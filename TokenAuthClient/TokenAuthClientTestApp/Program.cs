@@ -18,7 +18,7 @@ namespace TokenAuthClientTestApp
                 c.DefaultRequestHeaders.Add("TESTING", "LOCALHOST");
                 c.DefaultRequestHeaders.Add("AppClient","AU");
 
-                var authToken = c.AuthenticateAsync("robs@iaanyware.net", "dsdss").GetAwaiter().GetResult();
+                var authToken = c.AuthenticateAsync("TESTING", "dsdss").GetAwaiter().GetResult();
                 Dump(authToken);
             }
 
