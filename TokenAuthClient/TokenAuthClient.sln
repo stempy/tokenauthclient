@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAuthClient", "TokenAuthClient\TokenAuthClient.csproj", "{CAE43FBC-0A06-48C2-A42A-DF3DEE00AAF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenAuthClientTestApp", "TokenAuthClientTestApp\TokenAuthClientTestApp.csproj", "{85AD14CA-5B0C-4338-B3F5-FEE423AF741B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{CAE43FBC-0A06-48C2-A42A-DF3DEE00AAF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CAE43FBC-0A06-48C2-A42A-DF3DEE00AAF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CAE43FBC-0A06-48C2-A42A-DF3DEE00AAF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85AD14CA-5B0C-4338-B3F5-FEE423AF741B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85AD14CA-5B0C-4338-B3F5-FEE423AF741B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85AD14CA-5B0C-4338-B3F5-FEE423AF741B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85AD14CA-5B0C-4338-B3F5-FEE423AF741B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
