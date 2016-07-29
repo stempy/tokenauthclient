@@ -22,7 +22,7 @@ namespace TokenAuthClient
         public string TokenServer { get; set; }
         public string TokenAuthAction { get; set; } = "token";
 
-        public dynamic AuthTokenResult { get; private set; }
+        public TokenObj AuthTokenResult { get; private set; }
 
 
 
@@ -77,13 +77,14 @@ namespace TokenAuthClient
             if (resp.IsSuccessStatusCode)
             {
                 AuthTokenResult = await resp.Content.ReadAsAsync<TokenObj>();
+                this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",AuthTokenResult.access_token);
                 return AuthTokenResult;
             }
             else
             {
                 var cnt = await resp.Content.ReadAsStringAsync();
                 var exMsg = $"StatusCode:{resp.StatusCode} - {resp.ReasonPhrase} - {cnt}";
-                AuthTokenResult = new {Content = cnt, Message=exMsg};
+                var err = new {Content = cnt, Message=exMsg};
                 throw new AuthenticationException($"Unable to authenticate with {url} - Message:\n{exMsg}");
             }
         }
