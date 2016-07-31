@@ -8,24 +8,15 @@ using System.Threading.Tasks;
 
 namespace TokenAuthClient
 {
-    public class TokenObj
-    {
-        public string access_token { get; set; }
-        public string token_type { get; set; }
-        public int expires_in { get; set; }
-        public string refresh_token { get; set; }
-    }
-
-
     public class TokenClient : HttpClient
     {
+        #region [Props]
+
         public string TokenServer { get; set; }
         public string TokenAuthAction { get; set; } = "token";
-
         public TokenObj AuthTokenResult { get; private set; }
 
-
-
+        #endregion
 
         #region [Ctors..]
 
@@ -55,14 +46,16 @@ namespace TokenAuthClient
 
         #endregion
 
+        #region [Authenticate using bearer]
+
         public async Task<TokenObj> AuthenticateAsync(string username, string password)
         {
             var content = new FormUrlEncodedContent(new[]
-               {
-                    new KeyValuePair<string, string>("grant_type","password"),
-                    new KeyValuePair<string, string>("username",username),
-                    new KeyValuePair<string, string>("password",password),
-                });
+            {
+                new KeyValuePair<string, string>("grant_type", "password"),
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password),
+            });
 
             var url = $"{TokenServer}/{TokenAuthAction}";
 
@@ -70,24 +63,25 @@ namespace TokenAuthClient
             {
                 this.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             }
-            
 
             var resp = await this.PostAsync(url, content);
-
             if (resp.IsSuccessStatusCode)
             {
                 AuthTokenResult = await resp.Content.ReadAsAsync<TokenObj>();
-                this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",AuthTokenResult.access_token);
+                this.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",
+                    AuthTokenResult.access_token);
                 return AuthTokenResult;
             }
             else
             {
                 var cnt = await resp.Content.ReadAsStringAsync();
                 var exMsg = $"StatusCode:{resp.StatusCode} - {resp.ReasonPhrase} - {cnt}";
-                var err = new {Content = cnt, Message=exMsg};
+                var err = new {Content = cnt, Message = exMsg};
                 throw new AuthenticationException($"Unable to authenticate with {url} - Message:\n{exMsg}");
             }
         }
 
+
+        #endregion
     }
 }
