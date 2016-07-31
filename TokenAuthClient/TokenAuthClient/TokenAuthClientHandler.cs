@@ -20,6 +20,9 @@ namespace TokenAuthClient
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(_authToken))
+                throw new Exception("AuthToken not set");
+
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authToken);
             return await base.SendAsync(request,cancellationToken);
         }
