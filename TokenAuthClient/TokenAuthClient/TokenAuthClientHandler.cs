@@ -1,29 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TokenAuthClient
 {
     public class BearerTokenAuthClientHandler : DelegatingHandler
     {
-        private readonly string _authToken;
+        private readonly TokenObj _authToken;
 
-        public BearerTokenAuthClientHandler(string authToken)
+        public BearerTokenAuthClientHandler(TokenObj tokenObj)
         {
-            _authToken=authToken;
+            _authToken=tokenObj;
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             System.Threading.CancellationToken cancellationToken)
         {
-            if (string.IsNullOrEmpty(_authToken))
+            if (string.IsNullOrEmpty(_authToken.access_token))
                 throw new Exception("AuthToken not set");
 
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authToken);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _authToken.access_token);
             return await base.SendAsync(request,cancellationToken);
         }
     }

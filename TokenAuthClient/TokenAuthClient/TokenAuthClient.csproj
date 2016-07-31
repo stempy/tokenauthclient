@@ -52,6 +52,7 @@
     <Compile Include="TokenAuthClientHandler.cs" />
     <Compile Include="TokenClient.cs" />
     <Compile Include="TokenObj.cs" />
+    <Compile Include="TokenServerDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
