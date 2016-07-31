@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TokenAuth.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenAuthClientHandler.cs" />
     <Compile Include="TokenClient.cs" />
